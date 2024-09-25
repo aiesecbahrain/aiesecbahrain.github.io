@@ -108,42 +108,8 @@
                 <div class="mb-3">
                     <label for="university" class="form-label">University:</label>
                     <select class="form-select" id="university" required>
-                        <option value="High School Graduate">High School Graduate</option>
-                        <option value="Talal abu ghazaleh">Talal abu ghazaleh</option>
-                        <option value="UoB (Business)">UoB (Business)</option>
-                        <option value="Royal University for Women">Royal University for Women</option>
-                        <option value="Gulf University">Gulf University</option>
-                        <option value="I am a high school student">I am a high school student</option>
-                        <option value="UoB (Law)">UoB (Law)</option>
-                        <option value="Kingdom University">Kingdom University</option>
-                        <option value="UoB (College of Health and Science)">UoB (College of Health and Science)
-                        </option>
-                        <option value="UoB (Science)">UoB (Science)</option>
-                        <option value="RCSI Medical University of Bahrain">RCSI Medical University of Bahrain
-                        </option>
-                        <option value="Bahrain Training Institute">Bahrain Training Institute</option>
-                        <option value="UoB (Art)">UoB (Art)</option>
-                        <option value="Other (institutions existing in Bahrain)">Other (institutions existing in
-                            Bahrain)</option>
-                        <option value="AMA University">AMA University</option>
-                        <option value="Bahrain Institute of Banking and Finance">Bahrain Institute of Banking and
-                            Finance</option>
-                        <option value="Applied Sciences University">Applied Sciences University</option>
-                        <option value="Arab Gulf University">Arab Gulf University</option>
-                        <option value="UoB (Engineering)">UoB (Engineering)</option>
-                        <option value="Ahlia University">Ahlia University</option>
-                        <option value="UoB (Physical Education and Physiotherapy)">UoB (Physical Education and
-                            Physiotherapy)</option>
-                        <option value="UoB (Information Technology)">UoB (Information Technology)</option>
-                        <option value="Bahrain Polytechnic">Bahrain Polytechnic</option>
-                        <option value="UoB (Applied Science)">UoB (Applied Science)</option>
-                        <option value="Other (International Universities)">Other (International Universities)
-                        </option>
-                        <option value="UoB (Bahrain Teachers)">UoB (Bahrain Teachers)</option>
-                        <option value="University College of Bahrain">University College of Bahrain</option>
-                        <option value="Arab Open University">Arab Open University</option>
+                        <option value="" disabled selected>Select your university</option>
                     </select>
-
                 </div>
 
                 <div class="mb-3">
@@ -159,24 +125,7 @@
                 <div class="mb-3">
                     <label for="referral_type" class="form-label">Referral Type:</label>
                     <select class="form-select" id="referral_type" required>
-                        <option value="Friend">Friend</option>
-                        <option value="Information booth on campus">Information booth on campus</option>
-                        <option value="Classroom presentation">Classroom presentation</option>
-                        <option value="Facebook">Facebook</option>
-                        <option value="WeChat">WeChat</option>
-                        <option value="Twitter">Twitter</option>
-                        <option value="Instagram">Instagram</option>
-                        <option value="LinkedIn">LinkedIn</option>
-                        <option value="Heading for the future">Heading for the future</option>
-                        <option value="Other social media channel">Other social media channel</option>
-                        <option value="Search engine">Search engine</option>
-                        <option value="Event">Event</option>
-                        <option value="Emails">Emails</option>
-                        <option value="Telegram">Telegram</option>
-                        <option value="Vk">Vk</option>
-                        <option value="Media (magazine, TV, newspaper or radio)">Media (magazine, TV, newspaper or
-                            radio)</option>
-                        <option value="Other">Other</option>
+                        <option value="" disabled selected>Select a referral type</option>
                     </select>
                 </div>
                                 <div>
@@ -195,7 +144,38 @@
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const universitySelect = document.getElementById('university');
+            const referralSelect = document.getElementById('referral_type');
 
+            // Fetch and populate universities
+            fetch('universities.json')
+                .then(response => response.json())
+                .then(data => {
+                    data.universities.forEach(university => {
+                        let option = document.createElement('option');
+                        option.value = university;
+                        option.textContent = university;
+                        universitySelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error loading universities:', error));
+
+            // Fetch and populate referrals
+            fetch('referrals.json')
+                .then(response => response.json())
+                .then(data => {
+                    data.referrals.forEach(referral => {
+                        let option = document.createElement('option');
+                        option.value = referral;
+                        option.textContent = referral;
+                        referralSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error loading referrals:', error));
+        });
+    </script>
     <script>
         document.getElementById("userForm").addEventListener("submit", async function (e) {
             e.preventDefault();
