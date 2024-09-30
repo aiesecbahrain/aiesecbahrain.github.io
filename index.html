@@ -566,6 +566,47 @@
                 }
             });
         });
+                fetch(
+            "https://script.google.com/macros/s/AKfycbwFtwfIR9gChEvD9SIbaYQpN4ayY_7xOpvajLE4eIUSAW9-xshKUbAOVpnieIUjtg/exec",
+            {
+                redirect: "follow",
+                method: "POST",
+                body: formDataString,
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8",
+                },
+            }
+        )
+            .then(function (response) {
+                // Check if the request was successful
+                if (response) {
+                    return response; // Assuming your script returns JSON response
+                } else {
+                    throw new Error("Failed to submit the form.");
+                }
+            })
+            .then(function (data) {
+                // Display a success message
+                document.getElementById("message").textContent =
+                    "Data submitted successfully!";
+                document.getElementById("message").style.display = "block";
+                document.getElementById("message").style.backgroundColor = "green";
+                document.getElementById("message").style.color = "beige";
+                document.getElementById("submit-button").disabled = false;
+                document.getElementById("form").reset();
+
+                setTimeout(function () {
+                    document.getElementById("message").textContent = "";
+                    document.getElementById("message").style.display = "none";
+                }, 2600);
+            })
+            .catch(function (error) {
+                // Handle errors, you can display an error message here
+                console.error(error);
+                document.getElementById("message").textContent =
+                    "An error occurred while submitting the form.";
+                document.getElementById("message").style.display = "block";
+            });
 
     </script>
 </body>
