@@ -651,25 +651,36 @@
     }
 });
 
-    </script>
-        <script>
-        // Show the pop-up when the page loads
-        window.onload = function() {
-            const popup = document.getElementById('popup');
-            popup.style.display = 'block';
-    
-            // Set a timeout to hide the pop-up after 5 seconds
-            setTimeout(() => {
+<script>
+    window.onload = function() {
+        const popup = document.getElementById('popup');
+        const countdown = document.getElementById('countdown');
+        let timeLeft = 5;
+        
+        // Show the pop-up and start the countdown
+        popup.style.display = 'block';
+        countdown.textContent = `${timeLeft} seconds`;
+
+        // Countdown interval
+        const timer = setInterval(() => {
+            timeLeft -= 1;
+            countdown.textContent = `${timeLeft} seconds`;
+
+            // Close the popup when time is up
+            if (timeLeft <= 0) {
+                clearInterval(timer);
                 popup.style.display = 'none';
-            }, 5000);
-        };
-    
-        // Function to manually close the pop-up
-        function closePopup() {
-            const popup = document.getElementById('popup');
-            popup.style.display = 'none';
-        }
-    </script>
+            }
+        }, 1000);
+    };
+
+    // Function to manually close the pop-up
+    function closePopup() {
+        const popup = document.getElementById('popup');
+        popup.style.display = 'none';
+    }
+</script>
+
 </body>
 
 </html>
