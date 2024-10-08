@@ -182,10 +182,41 @@
                 transform: translateX(5px);
             }
         }
+                .popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    background-color: white;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    display: none;
+}
+
+.cover-image {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
     </style>
 </head>
 
 <body>
+        <div id="popup" class="popup-container">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <a href="https://bit.ly/BHH4TF" target="_blank">
+            <img src="h4tf.webp" alt="Cover Image" class="cover-image">
+        </a>
+    </div>
     <div class="container">
         <div class="row form-container">
             <!-- Cover image section -->
@@ -620,6 +651,24 @@
     }
 });
 
+    </script>
+        <script>
+        // Show the pop-up when the page loads
+        window.onload = function() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'block';
+    
+            // Set a timeout to hide the pop-up after 5 seconds
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 5000);
+        };
+    
+        // Function to manually close the pop-up
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
     </script>
 </body>
 
