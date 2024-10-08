@@ -199,13 +199,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 900px;
+    width: 800px;
     background-color: white;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    z-index: 1000; /* Above the overlay */
+    z-index: 1000;
+    display: none;
 }
-
 
 .cover-image {
     width: 100%;
@@ -219,14 +219,13 @@
     font-size: 24px;
     cursor: pointer;
 }
+
     </style>
 </head>
 
 <body>
-<div id="popup-overlay" class="popup-overlay"></div>
 <div id="popup" class="popup-container">
     <span class="close-btn" onclick="closePopup()">&times;</span>
-    <span id="countdown" class="countdown-timer"></span>
         <a href="https://bit.ly/BHH4TF" target="_blank">
             <img src="h4tf.webp" alt="Cover Image" class="cover-image">
         </a>
@@ -666,26 +665,15 @@
 });
 
 <script>
+    // Show the pop-up when the page loads
     window.onload = function() {
         const popup = document.getElementById('popup');
-        const countdown = document.getElementById('countdown');
-        let timeLeft = 5;
-        
-        // Show the pop-up and start the countdown
         popup.style.display = 'block';
-        countdown.textContent = `${timeLeft} seconds`;
 
-        // Countdown interval
-        const timer = setInterval(() => {
-            timeLeft -= 1;
-            countdown.textContent = `${timeLeft} seconds`;
-
-            // Close the popup when time is up
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                popup.style.display = 'none';
-            }
-        }, 1000);
+        // Set a timeout to hide the pop-up after 5 seconds
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 10000);
     };
 
     // Function to manually close the pop-up
@@ -694,6 +682,7 @@
         popup.style.display = 'none';
     }
 </script>
+
 
 </body>
 
